@@ -2,13 +2,14 @@
     "name": "song-pool",
     "version": "1.0.0",
     "description": "",
-    "main": "app.ts",
+    "main": "app.js",
+    "type": "module",
     "scripts": {
-        "start": "ts-node src/app.ts",
-        "build": "tsc",
-        "tsc": "tsc -w",
-        "serve": "node dist/app.js",
-        "nodemon": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/app.ts\""
+        "build": "rimraf dist && npx tsc",
+        "prestart": "npm run build",
+        "start": "node dist/app.js",
+        "predev": "npm run build",
+        "dev": "concurrently \"npx tsc -w\" \"nodemon ./dist/app.js\""
     },
     "repository": {
         "type": "git",
@@ -18,13 +19,18 @@
     "license": "ISC",
     "devDependencies": {
         "@types/express": "^4.17.21",
-        "@types/node": "^20.12.4",
+        "@types/node": "^20.12.5",
         "express": "^4.19.2",
         "nodemon": "^3.1.0",
         "ts-node": "^10.9.2",
         "typescript": "^5.4.4"
     },
     "dependencies": {
-        "dotenv": "^16.4.5"
+        "@types/axios": "^0.14.0",
+        "@types/dotenv": "^8.2.0",
+        "axios": "^1.6.8",
+        "concurrently": "^8.2.2",
+        "dotenv": "^16.4.5",
+        "rimraf": "^5.0.5"
     }
 }

@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = process.env.SONG_POOL_SERVER_PORT || 3000;
 
 app.get("/", (req: Request, res: Response) => {
-    res.send("Express + TypeScript Server");
+    res.send("Express + TypeScript Server 123 Hi Workig NOw? asdhkjd ");
 });
 
 app.listen(port, () => {
