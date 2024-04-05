@@ -1,0 +1,30 @@
+{
+    "name": "song-pool",
+    "version": "1.0.0",
+    "description": "",
+    "main": "app.ts",
+    "scripts": {
+        "start": "ts-node src/app.ts",
+        "build": "tsc",
+        "tsc": "tsc -w",
+        "serve": "node dist/app.js",
+        "nodemon": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/app.ts\""
+    },
+    "repository": {
+        "type": "git",
+        "url": "."
+    },
+    "author": "Aditya S. Dhage",
+    "license": "ISC",
+    "devDependencies": {
+        "@types/express": "^4.17.21",
+        "@types/node": "^20.12.4",
+        "express": "^4.19.2",
+        "nodemon": "^3.1.0",
+        "ts-node": "^10.9.2",
+        "typescript": "^5.4.4"
+    },
+    "dependencies": {
+        "dotenv": "^16.4.5"
+    }
+}
