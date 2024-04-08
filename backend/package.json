@@ -26,8 +26,6 @@
         "typescript": "^5.4.4"
     },
     "dependencies": {
-        "@types/axios": "^0.14.0",
-        "@types/dotenv": "^8.2.0",
         "axios": "^1.6.8",
         "concurrently": "^8.2.2",
         "dotenv": "^16.4.5",
