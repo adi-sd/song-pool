@@ -33,21 +33,23 @@ export class SpotifyAuth {
         }
     }
 
-    public static async getUserAuth(): Promise<string> {
-        Logger.info("Getting User Authorization");
+    public static async getAccessTokenWithCode(authCode: any): Promise<string> {
+        Logger.info("Getting Spotify Auth Token");
         try {
-            const authUrl: string = process.env.SPOTIFY_USER_AUTH_URL!;
-            const clientId: string = process.env.SPOTIFY_CLIENT_ID!;
-            const redirectUrl: string = process.env.REDIRECT_URL!;
-            const scope: string = process.env.SPOTIFY_AUTH_SCOPE!;
+            const tokenUrl: string = process.env.SPOTIFY_TOKEN_URL!;
+            const spotifyAuth: string = process.env.SPOTIFY_CLIENT_AUTH!;
+            const redirectUri: string = process.env.REDIRECT_URI!;
             let params = {
-                client_id: clientId,
-                response_type: "code",
-                scope: scope,
-                redirect_url: redirectUrl,
-                show_dialog: true,
+                code: authCode,
+                redirect_uri: redirectUri,
+                grant_type: "authorization_code",
+                json: true,
             };
-            let fetchCallResponse = (await FetchCall.httpCall("GET", authUrl, params)) as FetchCallResponse;
+            let headers = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: `Basic ${spotifyAuth}`,
+            };
+            let fetchCallResponse = (await FetchCall.httpCall("POST", tokenUrl, params, headers)) as FetchCallResponse;
             Logger.debug(`Got Response - ${fetchCallResponse.getJSONString()}`);
             if (fetchCallResponse.isSuccessResponse) {
                 return fetchCallResponse.httpResponse;
@@ -55,10 +57,40 @@ export class SpotifyAuth {
                 throw new Error(JSON.stringify(fetchCallResponse));
             }
         } catch (error) {
-            Logger.error("Exception while getting Spotify User Authorization", error);
+            Logger.error("Exception while getting Spotify access token", error);
             throw error;
         }
     }
+
+    // public static async getUserAuth(): Promise<string> {
+    //     Logger.info("Getting User Authorization");
+    //     try {
+    //         const authUrl: string = process.env.SPOTIFY_USER_AUTH_URL!;
+    //         const clientId: string = process.env.SPOTIFY_CLIENT_ID!;
+    //         const redirectUri: string = process.env.REDIRECT_URI!;
+    //         const scope: string = process.env.SPOTIFY_AUTH_SCOPE!;
+    //         const state: string = generateRandomString(16);
+    //         let params = {
+    //             client_id: clientId,
+    //             response_type: "code",
+    //             scope: scope,
+    //             redirect_uri: redirectUri,
+    //             show_dialog: true,
+    //             state: state,
+    //             market: SpotifyAuth.songMarket,
+    //         };
+    //         let fetchCallResponse = (await FetchCall.httpCall("GET", authUrl, params)) as FetchCallResponse;
+    //         Logger.debug(`Got Response - ${fetchCallResponse.getJSONString()}`);
+    //         if (fetchCallResponse.isSuccessResponse) {
+    //             return fetchCallResponse.httpResponse;
+    //         } else {
+    //             throw new Error(JSON.stringify(fetchCallResponse));
+    //         }
+    //     } catch (error) {
+    //         Logger.error("Exception while getting Spotify User Authorization", error);
+    //         throw error;
+    //     }
+    // }
 
     public static async testToken(): Promise<string> {
         return await SpotifyAuth.getAccessToken();

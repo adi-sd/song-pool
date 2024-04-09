@@ -27,11 +27,14 @@
     },
     "dependencies": {
         "@spotify/web-api-ts-sdk": "^1.2.0",
+        "@types/cookie-parser": "^1.4.7",
         "@types/cors": "^2.8.17",
         "axios": "^1.6.8",
         "concurrently": "^8.2.2",
+        "cookie-parser": "^1.4.6",
         "cors": "^2.8.5",
         "dotenv": "^16.4.5",
+        "querystring": "^0.2.1",
         "rimraf": "^5.0.5",
         "winston": "^3.13.0"
     }

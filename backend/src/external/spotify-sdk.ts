@@ -1,11 +1,4 @@
-import {
-    SpotifyApi,
-    RecommendationsRequest,
-    Track,
-    Market,
-    ClientCredentialsStrategy,
-    AuthorizationCodeWithPKCEStrategy,
-} from "@spotify/web-api-ts-sdk";
+import { SpotifyApi, RecommendationsRequest, Track, Market } from "@spotify/web-api-ts-sdk";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -31,23 +24,6 @@ export class SpotifySDK {
             return new SpotifySDK(webApi);
         }
     }
-
-    // private initializeSDK(): SpotifyApi {
-    //     const spotifyClientSecrete: string = process.env.SPOTIFY_CLIENT_SECRET!;
-    //     let sdk: SpotifyApi;
-    //     try {
-    //         let clientCredential = new ClientCredentialsStrategy(
-    //             SpotifySDK.spotifyClientId,
-    //             spotifyClientSecrete,
-    //             SpotifySDK.scopes
-    //         );
-    //         sdk = new SpotifyApi(clientCredential);
-    //     } catch (error) {
-    //         Logger.error("Exception while creating Spotify SDK Auth instance", error);
-    //         throw error;
-    //     }
-    //     return sdk;
-    // }
 
     public static getUserAuthorization() {
         let sdk: SpotifyApi;
