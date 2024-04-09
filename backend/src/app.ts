@@ -1,6 +1,7 @@
 import express, { Express, Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -10,8 +11,7 @@ import { Logger } from "./utils/logger/logger.js";
 import { ExternalApiCall } from "./external/external-api-call.js";
 import { ExternalApiCallError } from "./types/errors.js";
 import { SpotifySDK } from "./external/spotify-sdk.js";
-
-dotenv.config();
+import { SpotifyAuth } from "./external/spotify-auth.js";
 
 const app: Express = express();
 app.use(cors());
@@ -26,7 +26,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 app.get("/token", (req: Request, res: Response) => {
-    ExternalApiCall.textToken()
+    SpotifyAuth.testToken()
         .then((spotifyAccessToken) => res.send(spotifyAccessToken))
         .catch((error: ExternalApiCallError) => {
             res.status(500).send(error.fetchCallResponse);
@@ -55,7 +55,11 @@ app.get("/track_info", (req: Request, res: Response) => {
 
 app.get("/server-user-login", (req: Request, res: Response) => {
     Logger.info("GET - /server-user-login");
-    let webApi = SpotifySDK.getUserAuthorization();
+    SpotifyAuth.testUserAuth()
+        .then((authResponse) => res.send(authResponse))
+        .catch((error: ExternalApiCallError) => {
+            res.status(500).send(error.fetchCallResponse);
+        });
 });
 
 app.post("/server-user-login/callback", (req: Request, res: Response) => {

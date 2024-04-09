@@ -1,4 +1,4 @@
-import { HttpMethod } from "./commons.js";
+import { HttpMethod, HttpResponseType } from "./commons.js";
 
 export class FetchCallResponse {
     isSuccessResponse: boolean;
@@ -7,6 +7,7 @@ export class FetchCallResponse {
     httpStatusCode: number;
     httpStatusMessage: string;
     httpResponse?: any;
+    httpResponseType?: HttpResponseType;
     message?: string;
 
     constructor(
@@ -16,6 +17,7 @@ export class FetchCallResponse {
         httpStatusCode: number,
         httpStatusMessage: string,
         httpResponse?: any,
+        httpResponseType?: HttpResponseType,
         message?: string
     ) {
         this.isSuccessResponse = isSuccessResponse;
@@ -24,6 +26,7 @@ export class FetchCallResponse {
         this.httpStatusCode = httpStatusCode;
         this.httpStatusMessage = httpStatusMessage;
         this.httpResponse = httpResponse;
+        this.httpResponseType = httpResponseType;
         this.message = message;
     }
 
