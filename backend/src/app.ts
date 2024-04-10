@@ -5,6 +5,7 @@ dotenv.config();
 import path from "path";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+import querystring from "querystring";
 
 import { Logger } from "./utils/logger/logger.js";
 import { ExternalApiCall } from "./external/external-api-call.js";
@@ -23,6 +24,7 @@ const PORT = parseInt(process.env.SONG_POOL_SERVER_PORT!) || 3000;
 const APP_ACCESS_TOKEN = "spotify-access-token";
 const APP_REFRESH_TOKEN = "spotify-refresh-token";
 const APP_TOKEN_EXPIRY = "spotify-token-expiry";
+const APP_USER_AUTH = "spotify-user-auth";
 //
 
 app.get("/", (req: Request, res: Response) => {
@@ -64,7 +66,16 @@ app.get("/login", (req: Request, res: Response) => {
 
 app.get("/login/callback", (req: Request, res: Response) => {
     Logger.info("GET - /login/callback");
-    SpotifyAuth.handleAuthorizationCallback(req, res);
+    if (!req.query.error) {
+        SpotifyAuth.handleAuthorizationCallback(req, res);
+    } else {
+        res.redirect(
+            "/#" +
+                querystring.stringify({
+                    error: "User Authorization Denied!",
+                })
+        );
+    }
 });
 
 app.listen(PORT, () => {

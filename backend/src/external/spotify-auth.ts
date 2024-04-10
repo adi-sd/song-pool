@@ -13,6 +13,7 @@ const APP_STATE_KEY = "spotify-auth-state";
 const APP_ACCESS_TOKEN = "spotify-access-token";
 const APP_REFRESH_TOKEN = "spotify-refresh-token";
 const APP_TOKEN_EXPIRY = "spotify-token-expiry";
+const APP_USER_AUTH = "spotify-user-auth";
 
 const tokenUrl: string = process.env.SPOTIFY_TOKEN_URL!;
 const authUrl: string = process.env.SPOTIFY_USER_AUTH_URL!;
