@@ -2,6 +2,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "M PLUS 1 Code", monospace;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
 }
 
 .main-section {
@@ -17,4 +21,12 @@
   width: 50%;
   border: 1px solid black;
   border-radius: 15px;
+  padding: 3%;
+}
+.main-server-page hr {
+  margin: 2% 0;
+}
+.main-server-page ul {
+  padding-left: 2%;
+  list-style: square;
 }/*# sourceMappingURL=index.css.map */
