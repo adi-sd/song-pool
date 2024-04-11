@@ -1,6 +1,6 @@
 import { HttpMethod } from "../types/commons.js";
 import { FetchCallResponse } from "../types/errors.js";
-import { Logger } from "./logger/logger.js";
+import { Logger } from "./logger.js";
 
 export class FetchCall {
     static async httpCall(

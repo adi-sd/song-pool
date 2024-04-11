@@ -2,7 +2,7 @@ import { SpotifyApi, RecommendationsRequest, Track, Market } from "@spotify/web-
 import dotenv from "dotenv";
 dotenv.config();
 
-import { Logger } from "../utils/logger/logger.js";
+import { Logger } from "../utils/logger.js";
 
 export class SpotifySDK {
     private static instance: SpotifySDK | null = null;

@@ -50,7 +50,7 @@ class ExpiringStorage<T> {
 const expiringStorage = new ExpiringStorage();
 
 // Express middleware to provide access to the expiring storage instance
-export const expiringStorageMiddleware = (req: CustomRequest, res: Response, next: NextFunction) => {
+export const ExpiringStorageMiddleware = (req: CustomRequest, res: Response, next: NextFunction) => {
     req.expiringStorage = expiringStorage;
     next();
 };
