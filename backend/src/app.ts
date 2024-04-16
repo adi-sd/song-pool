@@ -80,7 +80,7 @@ app.get("/track_info", (req: Request, res: Response) => {
         });
 });
 
-//  Start the server
+//  Start the server main
 
 app.listen(PORT, () => {
     Logger.info(`Server is running at http://localhost:${PORT}`);
