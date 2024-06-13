@@ -1,5 +1,12 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const GET = () => {
-    return new NextResponse("GET on /spotify/login/callback is working!");
+export const GET = (req: NextRequest) => {
+    let authSuccess = false;
+    let reqParams = req.nextUrl.searchParams
+    if (!reqParams.get("error")) {
+        let code = reqParams.get("code");
+    }
+    return NextResponse.json({
+        spotifyAuthSuccess: authSuccess,
+    });
 };
