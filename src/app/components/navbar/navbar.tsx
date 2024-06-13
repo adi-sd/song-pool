@@ -1,6 +1,6 @@
 import "./navbar.scss";
 
-import UserProfile from "./user-login/user-login";
+import UserLogin from "./user-login/user-login";
 import PoolLogo from "../pool-logo/pool-logo";
 
 function Navbar() {
@@ -9,8 +9,8 @@ function Navbar() {
             <div className="app-logo">
                 <PoolLogo></PoolLogo>
             </div>
-            <div className="user-profile">
-                <UserProfile isUserLoggedIn={false}></UserProfile>
+            <div className="user-profile clickable-element">
+                <UserLogin></UserLogin>
             </div>
         </div>
     );
