@@ -13,14 +13,25 @@ const UserLogin: UserLoginComponent = () => {
 
     async function handleUserLoginClick() {
         setIsLoading(true);
-        const response = await fetch("http://localhost:3030/api/spotify/login");
+        const response = await fetch("http://localhost:3030/api/spotify/login", {
+            method: "GET",
+        });
         const { spotifyAuthUrl } = await response.json();
         const windowWidth = 600;
         const windowHeight = 900;
         const left = (window.screen.width - windowWidth) / 2;
         const top = (window.screen.height - windowHeight) / 2;
         const windowOptions = `width=${windowWidth},height=${windowHeight},left=${left},top=${top},scrollbars=no,resizable=no`;
-        const authWindow = window.open(spotifyAuthUrl, "Spotify User Login", windowOptions);
+        const authWindow = window.open(spotifyAuthUrl, "Spotify User Login", windowOptions)!;
+        if (authWindow?.location.href != spotifyAuthUrl) {
+            const response = authWindow.document.body.getElementsByTagName("pre")[0].innerText;
+            const spotifyAuthSuccess = JSON.parse(response).spotifyAuthSuccess;
+            if (spotifyAuthSuccess) {
+                setIsUserLoggedIn(true);
+                setIsLoading(false);
+                authWindow.close();
+            }
+        }
     }
 
     return (

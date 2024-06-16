@@ -1,7 +1,8 @@
+import { objectToQueryString, QueryParamsObject } from "@/app/utils/api-utils";
 import { NextResponse } from "next/server";
 
 export const GET = () => {
-    const params: queryParamsObject = {
+    const params: QueryParamsObject = {
         client_id: process.env.SPOTIFY_CLIENT_ID!,
         response_type: "code",
         scope: process.env.SPOTIFY_AUTH_SCOPE!,
@@ -13,17 +14,3 @@ export const GET = () => {
         spotifyAuthUrl: authUrl,
     });
 };
-
-interface queryParamsObject {
-    [key: string]: string | boolean;
-}
-
-function objectToQueryString(obj: queryParamsObject): string {
-    const params = new URLSearchParams();
-    for (const key in obj) {
-        if (obj.hasOwnProperty(key)) {
-            params.append(key, String(obj[key]));
-        }
-    }
-    return params.toString();
-}
