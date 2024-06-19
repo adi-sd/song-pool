@@ -13,6 +13,17 @@ const UserLogin: UserLoginComponent = () => {
     const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
     const [showModal, setShowModal] = useState(false);
 
+    const [spotifyAuthUrl, setSpotifyAuthUrl] = useState("");
+
+    // function openWindow(spotifyAuthUrl: string): Window {
+    //     const windowWidth = 600;
+    //     const windowHeight = 900;
+    //     const left = (window.screen.width - windowWidth) / 2;
+    //     const top = (window.screen.height - windowHeight) / 2;
+    //     const windowOptions = `width=${windowWidth},height=${windowHeight},left=${left},top=${top},scrollbars=no,resizable=no`;
+    //     return window.open(spotifyAuthUrl, "Spotify User Login", windowOptions)!;
+    // }
+
     async function handleUserLoginClick() {
         handleShowModal();
         // let spotifyAuthUrl: string;
@@ -34,11 +45,7 @@ const UserLogin: UserLoginComponent = () => {
     return (
         <div className="user-profile-component" onClick={handleUserLoginClick}>
             {isUserLoggedIn ? <div>User Is Logged In!</div> : <DummyUser></DummyUser>}
-            {showModal ? (
-                <LoginModal title="Login to Spotify" description="askjdgi" isOpen onChange={() => {}}>
-                    Test Children
-                </LoginModal>
-            ) : null}
+            {showModal ? <LoginModal handleShowModal={handleShowModal} url={spotifyAuthUrl}></LoginModal> : null}
         </div>
     );
 };

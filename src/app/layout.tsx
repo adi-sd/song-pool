@@ -5,7 +5,7 @@ import "./globals.scss";
 // Components
 import Navbar from "./components/navbar/navbar";
 import Main from "./components/main/main";
-import LoginModal from "./components/navbar/user-login/login-modal/login-modal";
+import SessionWrapper from "./components/session-wrapper/session-wrapper";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,14 +20,16 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en" suppressHydrationWarning>
-            <head>
-                <link rel="icon" href="/favicon.svg" sizes="any" />
-            </head>
-            <body className={inter.className}>
-                <Navbar></Navbar>
-                <Main></Main>
-            </body>
-        </html>
+        <SessionWrapper>
+            <html lang="en" suppressHydrationWarning>
+                <head>
+                    <link rel="icon" href="/favicon.svg" sizes="any" />
+                </head>
+                <body className={inter.className}>
+                    <Navbar></Navbar>
+                    <Main></Main>
+                </body>
+            </html>
+        </SessionWrapper>
     );
 }

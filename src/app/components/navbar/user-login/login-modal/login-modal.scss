@@ -1,4 +1,4 @@
-.login-modal-overlay {
+.login-modal-component-wrapper {
     height: 100%;
     width: 100%;
 
@@ -7,20 +7,32 @@
     left: 0;
 
     backdrop-filter: blur(10px);
-}
 
-.login-modal-content {
-    height: 900px;
-    width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    position: fixed;
-    top: 50%;
-    left: 50%;
+    .login-modal-component {
+        height: 900px;
+        width: 600px;
 
-    padding: 1%;
-    border-radius: 15px;
-    border: 2px solid black;
+        padding: 1%;
+        border-radius: 15px;
+        border: 2px solid black;
 
-    box-shadow: 0 0 10px black;
-    background-color: white;
+        background-color: white;
+
+        .close-button {
+            display: flex;
+            justify-content: end;
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .url-window {
+            height: 98%;
+            width: 100%;
+        }
+    }
 }
