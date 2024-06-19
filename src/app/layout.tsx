@@ -5,7 +5,7 @@ import "./globals.scss";
 // Components
 import Navbar from "./components/navbar/navbar";
 import Main from "./components/main/main";
-import { useState } from "react";
+import LoginModal from "./components/navbar/user-login/login-modal/login-modal";
 
 const inter = Inter({ subsets: ["latin"] });
 

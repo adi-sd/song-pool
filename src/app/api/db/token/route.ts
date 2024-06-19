@@ -1,17 +1,16 @@
 import { SpotifyAuthResponse } from "@/app/utils/response-types";
-import { NextApiHandler } from "next";
-
 import { PrismaClient } from "@prisma/client";
 import { PoolApiHeaders } from "@/app/utils/constants";
 
 const prisma = new PrismaClient();
 
 // url = http://localhost:3030/api/db/token?tokenType=access
-const GET: NextApiHandler = async (req) => {
+export const GET = async (req: Request) => {
+    const { searchParams } = new URL(req.url!);
     const getDbTokenResponse = {
         token: "",
     };
-    const tokenType = req.query.tokenType as string;
+    const tokenType = searchParams.get("tokenType");
     let dbResponseGet = await prisma.spotifyAuthTable.findFirst();
     if (dbResponseGet) {
         if (tokenType === "access") {
@@ -26,8 +25,9 @@ const GET: NextApiHandler = async (req) => {
 };
 
 // url = http://localhost:3030/api/db/token body = { access_token: "", refresh_token: "" }
-const POST: NextApiHandler = async (req) => {
-    const { access_token, refresh_token } = req.body as SpotifyAuthResponse;
+export const POST = async (req: Request) => {
+    const reqBody = await req.json();
+    const { access_token, refresh_token } = reqBody as SpotifyAuthResponse;
 
     // Delete all existing tokens from the database before storing the new one
     await prisma.spotifyAuthTable.deleteMany();
@@ -41,5 +41,3 @@ const POST: NextApiHandler = async (req) => {
     });
     return Response.json(postDbTokenResponse, PoolApiHeaders.POOL_API_SUCCESS);
 };
-
-export { GET, POST };

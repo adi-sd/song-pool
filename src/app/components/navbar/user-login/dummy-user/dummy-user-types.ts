@@ -1,3 +1,4 @@
 import { FunctionComponent } from "react";
 
-export type DummyUserComponent = FunctionComponent;
+export type DummyUserComponent = FunctionComponent
+
