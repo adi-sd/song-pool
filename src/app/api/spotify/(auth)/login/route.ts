@@ -1,7 +1,10 @@
 import { objectToQueryString, QueryParamsObject } from "@/app/utils/api-utils";
-import { NextResponse } from "next/server";
+import { PoolApiHeaders } from "@/app/utils/constants";
 
-export const GET = () => {
+import { NextApiHandler } from "next";
+
+// url =  http://localhost:3030/api/spotify/login
+const GET: NextApiHandler = () => {
     const params: QueryParamsObject = {
         client_id: process.env.SPOTIFY_CLIENT_ID!,
         response_type: "code",
@@ -10,7 +13,10 @@ export const GET = () => {
         show_dialog: true,
     };
     const authUrl = process.env.SPOTIFY_USER_AUTH_URL + "?" + objectToQueryString(params);
-    return NextResponse.json({
+    const getLoginResponse = {
         spotifyAuthUrl: authUrl,
-    });
+    };
+    return Response.json(getLoginResponse, PoolApiHeaders.POOL_API_SUCCESS);
 };
+
+export { GET };

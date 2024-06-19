@@ -6,7 +6,15 @@
         "dev": "next dev -p 3030",
         "build": "next build",
         "start": "next start -p 3030",
-        "lint": "next lint"
+        "lint": "next lint",
+        "db:pull": "npx dotenv -e .env.local -- prisma db pull",
+        "migrate:dev": "npx dotenv -e .env.local -- prisma migrate dev",
+        "db:push": "npx dotenv -e .env.local -- prisma db push",
+        "migrate:reset": "npx dotenv -e .env.local -- prisma migrate reset",
+        "db:seed": "npx dotenv -e .env.local -- prisma db seed",
+        "prisma:generate": "npx dotenv -e .env.local -- prisma generate",
+        "prisma:studio": "npx dotenv -e .env.local -- prisma studio",
+        "production:build": "npx prisma generate && npx prisma migrate deploy && next build"
     },
     "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^6.5.2",
@@ -14,11 +22,10 @@
         "@fortawesome/free-regular-svg-icons": "^6.5.2",
         "@fortawesome/free-solid-svg-icons": "^6.5.2",
         "@fortawesome/react-fontawesome": "^0.2.2",
-        "better-sqlite3": "^11.0.0",
-        "drizzle-orm": "^0.31.2",
+        "@prisma/client": "^5.15.1",
+        "axios": "^1.7.2",
         "localstorage": "^1.0.1",
         "next": "14.2.4",
-        "next-auth": "^5.0.0-beta.19",
         "react": "^18",
         "react-dom": "^18"
     },
@@ -27,9 +34,10 @@
         "@types/node": "^20",
         "@types/react": "^18",
         "@types/react-dom": "^18",
-        "drizzle-kit": "^0.22.7",
+        "dotenv-cli": "^7.4.2",
         "eslint": "^8",
         "eslint-config-next": "14.2.4",
+        "prisma": "^5.15.1",
         "sass": "^1.77.5",
         "typescript": "^5"
     }
