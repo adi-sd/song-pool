@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+
+// Styling
+import { Poppins } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+// Components
+import { ContentWrapper } from "./components/layout/content-wrapper";
+
+const popins = Poppins({ subsets: ["latin"], weight: ["200", "400", "600", "800", "900"] });
 
 export const metadata: Metadata = {
     title: "song-pool",
@@ -19,7 +24,9 @@ export default function RootLayout({
             <head>
                 <link rel="icon" type="image/x-icon" href="favicon.svg" />
             </head>
-            <body className={inter.className}>{children}</body>
+            <body className={popins.className}>
+                <ContentWrapper>{children}</ContentWrapper>
+            </body>
         </html>
     );
 }
