@@ -9,9 +9,7 @@ interface SuggestionProps {
 }
 
 export const Suggestions: React.FC<SuggestionProps> = ({ className }) => {
-    return (
-        <Card title="Suggestions" className={twMerge("", className)}>
-            <div>Suggestion Content</div>
-        </Card>
-    );
+    return <Card title="Suggestions" className={twMerge("", className)}><div>
+            Suggestion Content
+        </div></Card>;
 };

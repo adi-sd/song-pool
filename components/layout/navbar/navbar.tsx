@@ -24,7 +24,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
 
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
-        router.refresh();
+        router.replace("/");
         if (error) {
             toast.error("An error occurred while logging out");
         } else {
@@ -35,9 +35,9 @@ export const NavBar: React.FC<NavBarProps> = () => {
     return (
         <div className="h-[80px] mb-10 flex items-center">
             {user ? (
-                <span className="text-neutral-400 font-semibold text-[53px]">Hi, There...</span>
+                <span className="text-neutral-400 font-semibold text-[52px]">Welcome!</span>
             ) : (
-                <span className="text-neutral-400 font-semibold text-[53px]">
+                <span className="text-neutral-400 font-semibold text-[52px]">
                     Hi There, To Continue Please Login to your Spotify Account...
                 </span>
             )}
