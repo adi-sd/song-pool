@@ -1,3 +1,19 @@
+// Components
+
+import { MusicPlayer } from "@/components/music-player/music-player";
+import { Suggestions } from "@/components/suggestions/suggestions";
+import { Statistics } from "@/components/statistics/statistics";
+
 export default function Home() {
-    return <h1 className="text-7xl text-green-400">Hello Again!</h1>;
+    return (
+        <>
+            <div className="h-full w-[49%] mr-[1%]">
+                <MusicPlayer></MusicPlayer>
+            </div>
+            <div className="flex flex-col h-full w-[49%] ml-[1%]">
+                <Suggestions className="w-full h-[59%] mb-[1%]"></Suggestions>
+                <Statistics className="w-full h-[39%] mt-[1%]"></Statistics>
+            </div>
+        </>
+    );
 }

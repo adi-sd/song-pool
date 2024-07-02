@@ -24,9 +24,7 @@ export const NavBar: React.FC<NavBarProps> = () => {
 
     const handleLogout = async () => {
         const { error } = await supabaseClient.auth.signOut();
-
         router.refresh();
-
         if (error) {
             toast.error("An error occurred while logging out");
         } else {
