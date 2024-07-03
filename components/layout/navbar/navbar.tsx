@@ -6,16 +6,24 @@ import toast from "react-hot-toast";
 import Image from "next/image";
 
 // Styling
-import { FaUserAlt } from "react-icons/fa";
+import { FaUserAlt, FaSpotify } from "react-icons/fa";
 
 // Components
-import { useAuthModal } from "@/hooks/use-auth-modal";
 import { Button } from "../../commons/button";
+
+// Hooks
+import { useAuthModal } from "@/hooks/use-auth-modal";
 import { useUser } from "@/hooks/use-user";
 
-interface NavBarProps {}
+// Server Actions
+import { spotifyLogin, spotifyLogOut } from "@/actions/handle-social-login";
+import { twMerge } from "tailwind-merge";
 
-export const NavBar: React.FC<NavBarProps> = () => {
+interface NavBarProps {
+    className?: string;
+}
+
+export const NavBar: React.FC<NavBarProps> = ({ className }) => {
     const router = useRouter();
     const authModal = useAuthModal();
     const { user, userDetails } = useUser();
@@ -33,12 +41,12 @@ export const NavBar: React.FC<NavBarProps> = () => {
     };
 
     return (
-        <div className="h-[80px] mb-10 flex items-center">
+        <div className={twMerge("h-10 mb-16 flex items-center", className)}>
             {user ? (
                 <span className="text-neutral-400 font-semibold text-[52px]">Welcome!</span>
             ) : (
                 <span className="text-neutral-400 font-semibold text-[52px]">
-                    Hi There, To Continue Please Login to your Spotify Account...
+                    Hi There! Please Login to your Spotify Account...
                 </span>
             )}
             <div className="ml-auto flex gap-x-4">
@@ -90,6 +98,20 @@ export const NavBar: React.FC<NavBarProps> = () => {
                     </div>
                 )}
             </div>
+
+            {/* <div>
+                <form action={spotifyLogin}>
+                    <Button
+                        className="ml-3 px-7 py-5 text-3xl flex items-center "
+                        type="submit"
+                        name="action"
+                        value="spotify"
+                    >
+                        <FaSpotify className="mr-3" size={35}></FaSpotify>
+                        Spotify Login
+                    </Button>
+                </form>
+            </div> */}
         </div>
     );
 };

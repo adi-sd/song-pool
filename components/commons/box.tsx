@@ -9,9 +9,9 @@ interface BoxProps {
 
 export const Box: React.FC<BoxProps> = ({ children, className, title }) => {
     return (
-        <div className={twMerge("text-neutral-400 text-[30px] flex flex-col gap-y-2 pl-9", className)}>
-            {title ? <span className="font-normal text-[25px] mb-2">{title.toUpperCase()}</span> : null}
-            <>{children}</>
+        <div className={twMerge("text-neutral-400 text-[30px] flex flex-col gap-y-4", className)}>
+            {title ? <div className="font-normal text-[25px]">{title.toUpperCase()}</div> : null}
+            <div>{children}</div>
         </div>
     );
 };

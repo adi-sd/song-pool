@@ -12,10 +12,10 @@ interface ContentWrapperProps {
 export const ContentWrapper: React.FC<ContentWrapperProps> = ({ children }) => {
     return (
         <div className="flex h-full w-full">
-            <SideBar className="w-[450px] pt-[50px] px-12"></SideBar>
-            <div className="flex-1 pt-[50px] px-12 bg-sky-50">
-                <NavBar></NavBar>
-                <div className="h-[88%]">
+            <SideBar className="h-full w-[20%] pt-[50px] px-12"></SideBar>
+            <div className="h-full w-[80%] pt-[50px] p-12 bg-sky-50 flex flex-col">
+                <NavBar className="h-10"></NavBar>
+                <div className="flex-1">
                     <Main className="flex h-full w-full">{children}</Main>
                 </div>
             </div>
