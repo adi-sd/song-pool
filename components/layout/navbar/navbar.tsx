@@ -99,7 +99,7 @@ export const NavBar: React.FC<NavBarProps> = ({ className }) => {
                 )}
             </div>
 
-            {/* <div>
+            <div>
                 <form action={spotifyLogin}>
                     <Button
                         className="ml-3 px-7 py-5 text-3xl flex items-center "
@@ -111,7 +111,7 @@ export const NavBar: React.FC<NavBarProps> = ({ className }) => {
                         Spotify Login
                     </Button>
                 </form>
-            </div> */}
+            </div>
         </div>
     );
 };
