@@ -26,7 +26,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <head>
-                <link rel="icon" type="image/x-icon" href="favicon.svg" />
+                <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
             </head>
             <body className={popins.className}>
                 <ToastProvider></ToastProvider>

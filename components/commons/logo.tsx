@@ -1,5 +1,6 @@
 // Styling
-import { PiSwimmingPoolBold } from "react-icons/pi";
+import Image from "next/image";
+import Link from "next/link";
 
 interface LogoPops {
     size?: number;
@@ -7,9 +8,16 @@ interface LogoPops {
 
 export const Logo: React.FC<LogoPops> = ({ size = 90 }) => {
     return (
-        <div className="h-10 mb-16 flex items-center justify-between">
-            <PiSwimmingPoolBold size={size} className="font-semibold"></PiSwimmingPoolBold>
-            <h1 className="text-[50px] font-semibold">Song-Pool</h1>
+        <div className="h-10 mb-16 flex flex-col justify-center items-center">
+            <Link href={"/"}>
+                <Image
+                    src="/images/logo.svg"
+                    alt="logo image"
+                    height={40}
+                    width={500}
+                    className="bg-transparent object-cover"
+                ></Image>
+            </Link>
         </div>
     );
 };
