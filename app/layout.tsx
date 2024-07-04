@@ -5,9 +5,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 
 // Components
-import { SupabaseProvider } from "@/providers/supabase-provider";
 import { ContentWrapper } from "../components/layout/content-wrapper";
-import { UserProvider } from "@/providers/user-provider";
 import ModalProvider from "@/providers/modal-provider";
 import { ToastProvider } from "@/providers/toast-provider";
 
@@ -30,12 +28,8 @@ export default function RootLayout({
             </head>
             <body className={popins.className}>
                 <ToastProvider></ToastProvider>
-                <SupabaseProvider>
-                    <UserProvider>
-                        <ModalProvider></ModalProvider>
-                        <ContentWrapper>{children}</ContentWrapper>
-                    </UserProvider>
-                </SupabaseProvider>
+                <ModalProvider></ModalProvider>
+                <ContentWrapper>{children}</ContentWrapper>
             </body>
         </html>
     );
