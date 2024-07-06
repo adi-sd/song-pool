@@ -6,7 +6,7 @@ export const { handlers: {GET, POST}, auth, signIn, signOut } = NextAuth({
         SpotifyProvider({
             clientId: process.env.SPOTIFY_CLIENT_ID,
             clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
-            authorization: 'https://accounts.spotify.com/authorize?scope=user-read-private,user-read-email,user-read-currently-playing,user-read-playback-state,user-modify-playback-state&response_type=code',
+            authorization: `https://accounts.spotify.com/authorize?grant_type=authorization_code&scope=${process.env.SPOTIFY_AUTH_SCOPE}&response_type=code&redirect_uri=${process.env.REDIRECT_URI}`,
         })
     ],
 });

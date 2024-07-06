@@ -1,7 +1,7 @@
 // Styling
 import { twMerge } from "tailwind-merge";
 import { HiHome } from "react-icons/hi";
-import { RiSettings2Fill } from "react-icons/ri";
+import { FiSettings } from "react-icons/fi";
 
 // Components
 import { Logo } from "../../commons/logo";
@@ -18,7 +18,7 @@ export const SideBar: React.FC<SideBarProps> = ({ className }) => {
             <Logo></Logo>
             <Box title="menu" className="">
                 <SideBarItem icon={HiHome} name="Home"></SideBarItem>
-                <SideBarItem icon={RiSettings2Fill} name="Settings"></SideBarItem>
+                <SideBarItem icon={FiSettings} name="Settings"></SideBarItem>
             </Box>
         </div>
     );
