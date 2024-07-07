@@ -1,9 +1,10 @@
 "use client";
 
+import React from "react";
 import { BounceLoader } from "react-spinners";
 
 // Components
-import { Box } from "@/components/commons/box";
+import { Box } from "../../../components/commons/box";
 
 interface LoadingProps {}
 

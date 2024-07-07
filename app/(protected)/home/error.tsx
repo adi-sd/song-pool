@@ -1,7 +1,9 @@
 "use client";
 
+import React from "react";
+
 // Components
-import { Box } from "@/components/commons/box";
+import { Box } from "../../../components/commons/box";
 
 interface ErrorProps {}
 

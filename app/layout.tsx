@@ -6,8 +6,8 @@ import "./globals.css";
 
 // Components
 import { ContentWrapper } from "../components/layout/content-wrapper";
-import ModalProvider from "@/providers/modal-provider";
 import { ToastProvider } from "@/providers/toast-provider";
+import { SessionProvider } from "next-auth/react";
 
 const popins = Poppins({ subsets: ["latin"], weight: ["200", "400", "600", "800", "900"] });
 
@@ -27,9 +27,10 @@ export default function RootLayout({
                 <link rel="icon" type="image/x-icon" href="/images/favicon.svg" />
             </head>
             <body className={popins.className}>
-                <ToastProvider></ToastProvider>
-                <ModalProvider></ModalProvider>
-                <ContentWrapper>{children}</ContentWrapper>
+                <SessionProvider>
+                    <ToastProvider></ToastProvider>
+                    <ContentWrapper>{children}</ContentWrapper>
+                </SessionProvider>
             </body>
         </html>
     );

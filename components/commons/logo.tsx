@@ -2,13 +2,11 @@
 import Image from "next/image";
 import Link from "next/link";
 
-interface LogoPops {
-    size?: number;
-}
+interface LogoPops {}
 
-export const Logo: React.FC<LogoPops> = ({ size = 90 }) => {
+export const Logo: React.FC<LogoPops> = () => {
     return (
-        <div className="h-10 mb-16 flex flex-col justify-center items-center">
+        <div className="h-10 mb-16 flex flex-col justify-center items-center min-h-[40px] min-w-[150px]">
             <Link href={"/"}>
                 <Image
                     src="/images/logo.svg"
