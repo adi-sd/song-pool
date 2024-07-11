@@ -1,3 +1,5 @@
+import { type JWT } from "next-auth/jwt";
+
 export const getSpotifyAccessToken = async (code: string): Promise<string | null> => {
     try {
         const response = await fetch("https://accounts.spotify.com/api/token", {
@@ -22,6 +24,33 @@ export const getSpotifyAccessToken = async (code: string): Promise<string | null
         }
     } catch (error) {
         console.error((error as Error).message);
+        throw error;
+    }
+};
+
+export const refreshToken = async (token: JWT) => {
+    try {
+        const url = process.env.SPOTIFY_REFRESH_TOKEN_URL!;
+        const payload = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+            },
+            body: new URLSearchParams({
+                grant_type: "refresh_token",
+                refresh_token: token.refresh_token!,
+                client_id: process.env.SPOTIFY_CLIENT_ID!,
+            }),
+        };
+        const response = await fetch(url, payload);
+        if (!response.ok) {
+            throw response;
+        }
+        const body = await response.json();
+        return body;
+    } catch (error) {
+        // The error property can be used client-side to handle the refresh token error
+        console.error("Error refreshing access token", error);
         throw error;
     }
 };

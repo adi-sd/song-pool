@@ -1,13 +1,30 @@
 "use client";
 
 // Components
-import React from "react";
+import React, { useEffect } from "react";
 import { EmptyCard } from "../../components/commons/empty-card";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import { signIn } from "@/auth/auth";
 
 // Hooks
 
 export default function Site() {
-    // Return Empty Cards
+    const router = useRouter();
+    const { data: session, status } = useSession();
+
+    useEffect(() => {
+        if (session?.error === "RefreshAccessTokenError" || status == "unauthenticated") {
+            signIn();
+        }
+    }, [session, status]);
+
+    useEffect(() => {
+        if (status === "authenticated") {
+            router.push("/home");
+        }
+    }, [router, status]);
+
     return (
         <>
             <div className="h-full w-[49%] mr-[1%]">

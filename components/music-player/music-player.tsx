@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSession } from "next-auth/react";
+// import { SessionProvider, signIn, useSession } from "next-auth/react";
 
 // Styling
 import { twMerge } from "tailwind-merge";
@@ -10,42 +10,69 @@ import { twMerge } from "tailwind-merge";
 import { Card } from "../commons/card";
 
 // Server Actions
-import { getPlayBackState } from "@/actions/get-playback-state";
+import { getPlayBackState } from "@/actions/playback-state";
+import { MusicTrack } from "./music-track";
+import { Device, Track } from "spotify-api.js";
+import { useSession } from "next-auth/react";
+import { signIn } from "@/auth/auth";
 
 interface MusicPlayerProps {
     className?: string;
 }
 
 export const MusicPlayer: React.FC<MusicPlayerProps> = ({ className }) => {
-    const [isLoading, setIsLoading] = useState(false);
     const { data: session, status } = useSession();
+    const [isLoading, setIsLoading] = useState(false);
 
-    const [playBackState, setPlayBackState] = useState(null);
+    const [playBackState, setPlayBackState] = useState<any>();
 
     useEffect(() => {
-        const fetchData = async (authToken: string) => {
-            setIsLoading(true);
+        if (session?.error === "RefreshAccessTokenError" || status == "unauthenticated") {
+            signIn();
+        }
+    }, [session, status]);
+
+    useEffect(() => {
+        const fetchData = async () => {
             try {
-                const playBackState = await getPlayBackState(authToken);
-                setPlayBackState(playBackState);
+                setIsLoading(true);
+                const playBackState = await getPlayBackState();
+                if (playBackState.error) {
+                    console.error("Nothing is playing on spotify!");
+                } else {
+                    // console.log(playBackState.data);
+                    setPlayBackState(playBackState.data);
+                }
             } catch (error) {
                 console.error(error);
             } finally {
                 setIsLoading(false);
             }
         };
+        fetchData();
+    }, []);
 
-        if (session && status === "authenticated") {
-            fetchData(
-                "BQCMc9l4ttByOIP7_oYxUydha4Yzx3e2QyEbTm3Eyrb-8fwreWyPfAux8yYAIxysQJaG-PcfShh6zv68TSGPVISzbidY_zrgg0kytRioFKvaguYEvp4MFn9RSnOWTl77Fbs05FdkglRNANTBwNZplzUZhLm2aioMZuty751PHt42qnm-6HqYjHPHgvfabpRZI-KkNjZwViSrO92d63Lnnky5Z62j"
-            );
-        }
-    }, [session, status]);
+    if (isLoading) {
+        return (
+            <Card title="Currently Playing" className={twMerge("", className)}>
+                <div className="flex w-full h-full items-center justify-center">Loading...</div>
+            </Card>
+        );
+    }
 
     return (
         <Card title="Currently Playing" className={twMerge("", className)}>
-            <div>Music Player Content</div>
-            <p>{JSON.stringify(playBackState)}</p>
+            <div className="w-full h-full">
+                {playBackState ? (
+                    <MusicTrack
+                        trackItem={playBackState.item as Track}
+                        isPlaying={playBackState.is_playing}
+                        deviceItem={playBackState.device as Device}
+                    ></MusicTrack>
+                ) : (
+                    <h2>Nothings Playing!</h2>
+                )}
+            </div>
         </Card>
     );
 };
