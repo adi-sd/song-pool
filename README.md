@@ -46,7 +46,6 @@ This project is licensed under the [Apache-2.0 License](LICENSE).
 
 <br/>
 <br/>
-<br/>
 
 <b>This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).</b>
 
