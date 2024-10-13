@@ -1,5 +1,5 @@
 import NextAuth, { type User } from "next-auth";
-import { JWT } from "next-auth/jwt";
+// import { JWT } from "next-auth/jwt";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import { db } from "@/lib/db";

@@ -20,7 +20,11 @@ export const NavBar: React.FC<NavBarProps> = ({ className }) => {
 
     return (
         <div className={twMerge("h-10 w-full mb-16 flex items-center", className)}>
-            {status === "authenticated" ? <UserProfile user={session?.user}></UserProfile> : <LogIn></LogIn>}
+            {status === "authenticated" && session?.user ? (
+                <UserProfile user={session.user}></UserProfile>
+            ) : (
+                <LogIn></LogIn>
+            )}
         </div>
     );
 };
