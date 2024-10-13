@@ -1,4 +1,4 @@
-# song-pool : music platform for communal spaces
+# Song-Pool: Interactive Music Curating Platform
 
 ## Overview
 
