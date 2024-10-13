@@ -15,7 +15,7 @@ export default function Site() {
 
     useEffect(() => {
         if (session?.error === "RefreshAccessTokenError" || status == "unauthenticated") {
-            signIn();
+            // signIn();
         }
     }, [session, status]);
 
