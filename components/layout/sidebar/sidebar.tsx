@@ -14,7 +14,7 @@ interface SideBarProps {
 
 export const SideBar: React.FC<SideBarProps> = ({ className }) => {
     return (
-        <div className={twMerge("text-neutral-500", className)}>
+        <div className={twMerge("text-neutral-500 hidden sm:block", className)}>
             <Logo></Logo>
             <Box title="menu" className="">
                 <SideBarItem icon={HiHome} name="Home"></SideBarItem>
